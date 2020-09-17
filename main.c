@@ -31,6 +31,8 @@ int main(int argc, char const *argv[])
         printf("%d ", temp);
     }
 
+    vector_assign(&v, 2, 999);
+
     printf("\n");
 
     vector_foreach_rev(&v, temp, i) {
@@ -48,6 +50,20 @@ int main(int argc, char const *argv[])
     vector_foreach_ptr_rev(&v, temp_ptr, i) {
         printf("%d ", *temp_ptr);
     }
+
+    printf("\n");
+
+    for(int i = 0; i < 1000; ++i) {
+        vector_push_back(&v2, i);
+    }
+
+    for(int i = 0; i < 1000; ++i) {
+        vector_pop_back(&v2);
+    }
+
+    printf("capacity: %d\n", (int)vector_capacity(&v2));
+    vector_shrink_to_fit(&v2);
+    printf("capacity: %d\n", (int)vector_capacity(&v2));
 
     delete_vector(&v);
     delete_vector(&v2);

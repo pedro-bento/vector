@@ -50,6 +50,8 @@ void __vector_reserve(char **data, size_t *size, size_t *capacity, size_t elemen
 void __vector_resize(char **data, size_t *size, size_t *capacity, size_t element_size, size_t n) {
     (void) size;
 
-    *data = realloc(*data, n * element_size);
-    *capacity = n;
+    if(*capacity != n) {
+        *data = realloc(*data, n * element_size);
+        *capacity = n;
+    }
 }
