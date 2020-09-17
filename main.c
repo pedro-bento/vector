@@ -26,9 +26,27 @@ int main(int argc, char const *argv[])
 
     vector_sort(&v, int_comparator);
 
-    int temp;
+    int temp, *temp_ptr;
     vector_foreach(&v, temp, i) {
         printf("%d ", temp);
+    }
+
+    printf("\n");
+
+    vector_foreach_rev(&v, temp, i) {
+        printf("%d ", temp);
+    }
+
+    printf("\n");
+
+    vector_foreach_ptr(&v, temp_ptr, i) {
+        printf("%d ", *temp_ptr);
+    }
+
+    printf("\n");
+
+    vector_foreach_ptr_rev(&v, temp_ptr, i) {
+        printf("%d ", *temp_ptr);
     }
 
     delete_vector(&v);

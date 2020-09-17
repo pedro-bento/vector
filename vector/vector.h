@@ -10,12 +10,7 @@
 
 // Type.
 
-#define Vector(T)\
-    struct {\
-        size_t capacity;\
-        size_t size;\
-        T *data;\
-    }
+#define Vector(T)   struct { size_t capacity; size_t size; T *data; }
 
 // Constructor and Destructor. 
 
@@ -46,33 +41,10 @@
 
 // Algorithms.
 
-#define vector_foreach(vector, variable, iterator)\
-    if((vector)->size > 0)\
-    for(long long (iterator) = 0;\
-        (iterator) < (vector)->size &&\
-        (((variable) = (vector)->data[(iterator)]), 1);\
-        ++(iterator))
-
-#define vector_foreach_rev(vector, variable, iterator)\
-    if((vector)->size > 0)\
-    for(long long (iterator) = (vector)->size - 1;\
-        (iterator) >= 0 &&\
-        (((variable) = (vector)->data[(iterator)]), 1);\
-        --(iterator))
-
-#define vector_foreach_ptr(vector, variable, iterator)\
-    if((vector)->size > 0)\
-    for(long long (iterator) = 0;\
-        (iterator) < (vector)->size &&\
-        (((variable) = &(vector)->data[(iterator)]), 1);\
-        ++(iterator))
-
-#define vector_foreach_ptr_rev(vector, variable, iterator)\
-    if((vector)->size > 0)\
-    for(long long (iterator) = (vector)->size - 1;\
-        (iterator) >= 0 &&\
-        (((variable) = &(vector)->data[(iterator)]), 1);\
-        --(iterator))
+#define vector_foreach(vector, variable, iterator)          if((vector)->size > 0) for(long long (iterator) = 0; (iterator) < (vector)->size && (((variable) = (vector)->data[(iterator)]), 1); ++(iterator))
+#define vector_foreach_rev(vector, variable, iterator)      if((vector)->size > 0) for(long long (iterator) = (vector)->size - 1; (iterator) >= 0 && (((variable) = (vector)->data[(iterator)]), 1); --(iterator))
+#define vector_foreach_ptr(vector, variable, iterator)      if((vector)->size > 0) for(long long (iterator) = 0; (iterator) < (vector)->size && (((variable) = &(vector)->data[(iterator)]), 1); ++(iterator))
+#define vector_foreach_ptr_rev(vector, variable, iterator)  if((vector)->size > 0) for(long long (iterator) = (vector)->size - 1; (iterator) >= 0 && (((variable) = &(vector)->data[(iterator)]), 1); --(iterator))
 
 #define vector_sort(vector, comparator)   qsort((vector)->data, (vector)->size, sizeof(*(vector)->data), comparator)
 
