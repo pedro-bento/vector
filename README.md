@@ -33,69 +33,38 @@ A generic type-safe vector implementation in pure C.
 
 # Examples
 ```c
-#include <stdio.h>
+Vector(int) vector;
+new_vector(&vector);
 
-#include "vector/vector.h"
+vector_push_back(&vector, 42);
+vector_push_back(&vector, 21);
 
-int main(int argc, char const *argv[])
-{
-    (void) argc;
-    (void) argv;
+int size = vector_size(&vector); 
+int capacity = vector.capacity;
 
-    Vector(int) vector;
-    new_vector(&vector);
+int first = vector_front(&vector);
+int last = vector_back(&vector);
 
-    vector_push_back(&vector, 42);
-    vector_push_back(&vector, 21);
+vector_data(&vector)[0] = vector_back(&vector);
 
-    printf("\nsize = %d, capacity = %d\n", (int)vector_size(&vector), (int)vector_capacity(&vector));
+vector_pop_back(&vector);
 
-    printf("front = %d, back = %d, data[0] = %d\n", vector_front(&vector), vector_back(&vector), vector_data(&vector)[0]);
-
-    vector_pop_back(&vector);
-
-    delete_vector(&vector);
-
-    Vector(int) v;
-    new_vector(&v);
-
-    for(int i = 0; i < 18; ++i) {
-        vector_push_back(&v, i);
-    }
-
-    int temp, *temp_ptr;
-
-    printf("\nvector_foreach\n");
-    vector_foreach(&v, temp, i) {
-        printf("%d ", temp);
-    }   
-    printf("\n");
-
-    printf("vector_foreach_rev\n");
-    vector_foreach_rev(&v, temp, i) {
-        printf("%d ", temp);
-    }   
-    printf("\n");
-
-    printf("vector_foreach_ptr\n");
-    vector_foreach_ptr(&v, temp_ptr, i) {
-        printf("%d ", *temp_ptr);
-    }   
-    printf("\n");
-
-    printf("vector_foreach_ptr_rev\n");
-    vector_foreach_ptr_rev(&v, temp_ptr, i) {
-        printf("%d ", *temp_ptr);
-    }   
-    printf("\n\n");
-
-    vector_clear(&v);
-
-    printf("cleared vector size = %d", (int)v.size);
-
-    delete_vector(&v);
-
-    return 0;
+for(int i = 0; i < 18; ++i) {
+    vector_push_back(&vector, i);
 }
+
+int temp, *temp_ptr;
+
+vector_foreach(&vector, temp, i) {
+    printf("%d ", temp);
+}   
+
+vector_foreach_ptr_rev(&vector, temp_ptr, i) {
+    printf("%d ", *temp_ptr);
+}   
+
+vector_clear(&v);
+
+delete_vector(&v);
 
 ```
