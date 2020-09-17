@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 // Definitions
 #define VECTOR_GROWTH_FACTOR 2
@@ -29,17 +30,17 @@
 
 // Insertion
 #define vector_assign(vector, index, element)           ((vector)->data[(index)] = (element))
-// TODO: vector_insert(vector, index, element)
+#define vector_insert(vector, index, element)           do { assert(index < (vector)->size); __vector_move_right(__vector_unpack(vector), index); vector_assign(vector, index, element); (vector)->size++; } while(0)
 #define vector_push_back(vector, element)               do { __vector_expand(__vector_unpack(vector)); (vector)->data[(vector)->size] = (element); (vector)->size++; } while(0)
-// TODO: vector_push_front(vector, element)             vector_insert(vector, 0, element)
+#define vector_push_front(vector, element)              do { __vector_expand(__vector_unpack(vector)); vector_insert(vector, 0, element); } while (0)
 #define vector_push_array(vector, array, array_size)    do { vector_reserve(vector, vector_size(vector) + (array_size)); memcpy(&(vector)->data[(vector)->size], array, array_size * sizeof(*array)); (vector)->size += array_size; } while(0)
 #define vector_extend(vector_dst, vector_src)           vector_push_array(vector_dst, (vector_src)->data, (vector_src)->size)
 
 // Deletion
-#define vector_clear(vector)    ((vector)->size = 0)
-// TODO: vector_erase(vector, index)
-#define vector_pop_back(vector) ((vector)->size--)
-// TODO: vector_pop_front(vector)   vector_erase(vector, 0)
+#define vector_clear(vector)        ((vector)->size = 0)
+#define vector_erase(vector, index) do { assert(index < (vector)->size); __vector_move_left(__vector_unpack(vector), index); (vector)->size--; } while(0)
+#define vector_pop_back(vector)     do { assert((vector)->size > 0); (vector)->size--; } while(0)
+#define vector_pop_front(vector)    vector_erase(vector, 0)
 
 // Lookup
 #define vector_front(vector)        (vector)->data[0]
@@ -75,5 +76,7 @@ void __vector_reserve(char **data, size_t *size, size_t *capacity, size_t elemen
 void __vector_resize(char **data, size_t *size, size_t *capacity, size_t element_size, size_t n);
 void __vector_swap(char **data, size_t *size, size_t *capacity, size_t element_size, size_t index1, size_t index2);
 void __vector_reverse(char **data, size_t *size, size_t *capacity, size_t element_size);
+void __vector_move_left(char **data, size_t *size, size_t *capacity, size_t element_size, size_t index);
+void __vector_move_right(char **data, size_t *size, size_t *capacity, size_t element_size, size_t index);
 
 #endif // VECTOR_H

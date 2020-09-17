@@ -61,3 +61,17 @@ void __vector_reverse(char **data, size_t *size, size_t *capacity, size_t elemen
         end--;
     }
 }
+
+void __vector_move_left(char **data, size_t *size, size_t *capacity, size_t element_size, size_t index) {
+    size_t offset = index * element_size;
+    size_t number_of_bytes = (*size - index - 1) * element_size;
+    memmove(*data + offset, *data + offset + element_size, number_of_bytes);
+}
+
+void __vector_move_right(char **data, size_t *size, size_t *capacity, size_t element_size, size_t index) {
+    assert(*size < *capacity);
+
+    size_t offset = index * element_size;
+    size_t number_of_bytes = (*size - index) * element_size;
+    memmove(*data + offset + element_size, *data + offset, number_of_bytes);
+}

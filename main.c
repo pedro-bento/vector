@@ -43,14 +43,31 @@ int main(int argc, char const *argv[])
         printf("%d ", temp);
     }
 
-    printf("\n");
-
     vector_reverse(&v);
 
+    printf("\n");
     vector_foreach(&v, temp, i) {
         printf("%d ", temp);
     }
-    
+
+    vector_push_front(&v, 999);
+    vector_push_front(&v, 999);
+    vector_push_front(&v, 999);
+
+    printf("\n");
+    vector_foreach(&v, temp, i) {
+        printf("%d ", temp);
+    }
+
+    vector_pop_front(&v);
+    vector_pop_front(&v);
+    vector_pop_front(&v);
+
+    printf("\n");
+    vector_foreach(&v, temp, i) {
+        printf("%d ", temp);
+    }
+
     vector_delete(&v);
 
     return 0;
