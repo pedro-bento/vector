@@ -55,3 +55,33 @@ void __vector_resize(char **data, size_t *size, size_t *capacity, size_t element
         *capacity = n;
     }
 }
+
+void __vector_swap(char **data, size_t *size, size_t *capacity, size_t element_size, size_t index1, size_t index2) {
+    (void) size;
+    (void) capacity;
+
+    if(index1 == index2) return;
+
+    char *a, *b, tmp;
+    a = (char*)*data + index1 * element_size;
+    b = (char*)*data + index2 * element_size;
+
+    while(element_size--) {
+        tmp = *a;
+        *a = *b;
+        *b = tmp;
+        a++;
+        b++;
+    }
+}
+
+void __vector_reverse(char **data, size_t *size, size_t *capacity, size_t element_size) {
+    size_t start = 0;
+    size_t end = *size - 1;
+
+    while(start < end) {
+        __vector_swap(data, size, capacity, element_size, start, end);
+        start++;
+        end--;
+    }
+}
