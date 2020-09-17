@@ -55,7 +55,11 @@ for(int i = 0; i < 18; ++i) {
 
 int temp, *temp_ptr;
 
-vector_foreach_ptr_rev(&v, temp_ptr, i) {
+vector_foreach(&vector, temp, i) {
+    printf("%d ", temp);
+}   
+
+vector_foreach_ptr_rev(&vector, temp_ptr, i) {
     printf("%d ", *temp_ptr);
 }   
 
