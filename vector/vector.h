@@ -16,10 +16,10 @@
     }
 
 // Constructor 
-#define delete_vector(vector)   free((vector)->data)
+#define vector_new(vector)      memset((vector), 0, sizeof(*(vector)))
 
 // Destructor
-#define new_vector(vector)      memset((vector), 0, sizeof(*(vector)))
+#define vector_delete(vector)   free((vector)->data)
 
 // Copy
 // TODO: vector_copy(vector_dst, vector_src)
@@ -68,13 +68,7 @@
 #define vector_swap(vector, index1, index2)                 __vector_swap(__vector_unpack(vector), index1, index2)
 #define vector_reverse(vector)                              __vector_reverse(__vector_unpack(vector))
 
-// Public helper functions
-int char_comparator(const void *a, const void *b);
-int int_comparator(const void *a, const void *b);
-int float_comparator(const void *a, const void *b);
-int double_comparator(const void *a, const void *b);
-
-// Private helper functions and macros
+// Private
 #define __vector_unpack(vector) (char**)&(vector)->data, &(vector)->size, &(vector)->capacity, sizeof(*(vector)->data)  
 void __vector_expand(char **data, size_t *size, size_t *capacity, size_t element_size);
 void __vector_reserve(char **data, size_t *size, size_t *capacity, size_t element_size, size_t n);
