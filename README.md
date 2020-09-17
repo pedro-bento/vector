@@ -44,6 +44,11 @@ Inserts 'element' at the end of vector 'v', if needed, increases the capacity of
 ```c 
 vector_push_back(&v, 'A');
 ```
+### vector_push_front(&v, element)
+Inserts 'element' at the beginning of vector 'v' by moving all elements to the right, if needed, increases the capacity of 'v'
+```c 
+vector_push_front(&v, 'B');
+```
 ### vector_push_array(&v, array, array_size)
 Extends vector 'v' by appending all 'array_size' values of 'array', if needed, increases the capacity of 'v'
 ```c 
