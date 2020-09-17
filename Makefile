@@ -1,6 +1,6 @@
 executable = vector
 compiler = gcc
-flags = -Wall -std=c11
+flags = -Wall -std=c11 -O3
 files = main.c $(wildcard vector/*.c)
 
 $(executable): $(files)
