@@ -37,10 +37,12 @@
 
 // Modifiers.
 
-#define vector_clear(vector)                ((vector)->size = 0)
-#define vector_push_back(vector, element)   (__vector_expand(__vector_unpack(vector)), (vector)->data[(vector)->size] = (element), (vector)->size++)
-#define vector_pop_back(vector)             (if ((vector)->size > 0) (vector)->size--)
-#define vector_resize(vector, n)            __vector_resize(__vector_unpack(vector), n)
+#define vector_clear(vector)                            ((vector)->size = 0)
+#define vector_push_back(vector, element)               (__vector_expand(__vector_unpack(vector)), (vector)->data[(vector)->size] = (element), (vector)->size++)
+#define vector_pop_back(vector)                         (if ((vector)->size > 0) (vector)->size--)
+#define vector_resize(vector, n)                         __vector_resize(__vector_unpack(vector), n)
+#define vector_push_array(vector, array, array_size)     do { vector_reserve(vector, vector_size(vector) + (array_size)); memcpy(&(vector)->data[(vector)->size], array, array_size * sizeof(*array)); (vector)->size += array_size; } while(0)
+#define vector_extend(vector_dst, vector_src)           vector_push_array(vector_dst, (vector_src)->data, (vector_src)->size)
 
 // Algorithms.
 
