@@ -27,7 +27,7 @@ A generic type-safe vector implementation in pure C.
 * vector_push_back(&vector, element)
 * vector_pop_back(&vector)
 * vector_resize(&vector)
-* vector_push_array(&vector, &array, array_size)
+* vector_push_array(&vector, array, array_size)
 * vector_extend(&vector_dst, &vector_src)
 
 ## Algorithms
