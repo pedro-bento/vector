@@ -7,28 +7,38 @@ A generic type-safe vector implementation in pure C.
 ## Type
 * Vector(T) 
 
-## Constructor and Destructor
+## Constructor 
 * new_vector(&vector)
+
+## Destructor 
 * delete_vector(&vector)
 
-## Element access
+## Insertion
+* vector_push_back(&vector, element)
+* vector_push_array(&vector, array, array_size)
+* vector_extend(&vector_dst, &vector_src)
+* vector_assign(vector, index, element)
+
+## Deletion
+* vector_clear(&vector)
+* vector_pop_back(&vector)
+
+## Lookup
 * vector_front(&vector)
 * vector_back(&vector)
 * vector_data(&vector)
 
-## Capacity
+## Information
 * vector_empty(&vector)
+* vector_full(&vector)
 * vector_size(&vector)
-* vector_reserve(&vector)
 * vector_capacity(&vector)
+* vector_unused_space(&vector)
 
-## Modifiers
-* vector_clear(&vector)
-* vector_push_back(&vector, element)
-* vector_pop_back(&vector)
+## Memory management
 * vector_resize(&vector)
-* vector_push_array(&vector, array, array_size)
-* vector_extend(&vector_dst, &vector_src)
+* vector_reserve(&vector)
+* vector_shrink_to_fit(&vector)
 
 ## Algorithms
 * vector_foreach(&vector, variable, iterator)
