@@ -23,7 +23,7 @@
 #define vector_copy(vector_dst, vector_src)     do { vector_reserve(vector_dst, (vector_src)->size); memcpy((vector_dst)->data, (vector_src)->data, (vector_src)->size * sizeof(*(vector_src)->data)); (vector_dst)->size = (vector_src)->size; (vector_dst)->capacity = (vector_src)->capacity; } while(0)
 
 // Move
-#define vector_move(vector_dst, vector_src)     do { vector_delete(vector_dst); *vector_dst = *vector_src; memset((vector_src), 0, sizeof(*(vector_src))); } while(0)
+#define vector_move(vector_dst, vector_src)     do { vector_delete(vector_dst); (vector_dst)->size = (vector_src)->size; (vector_dst)->capacity = (vector_src)->capacity; (vector_dst)->data = (vector_src)->data; memset((vector_src), 0, sizeof(*(vector_src))); } while(0)
 
 // Insertion
 #define vector_assign(vector, index, element)           do { assert(index < (vector)->capacity); ((vector)->data[(index)] = (element)); } while(0)
