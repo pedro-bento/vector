@@ -19,17 +19,14 @@ int main(int argc, char const *argv[])
     vector_new(&v1);
     vector_new(&v2);
 
-    vector_push_array(&v1, ((const int[]){9, 8, 7, 6, 5, 4, 3, 2, 1, 0}), 10);
+    vector_push_array(&v1, ((const int[]){9, 8, 7, 6, 5, 4, 3, 2, 1, 0}), 100);
 
-    vector_move(&v2, &v1);
-
-    int temp;
-    vector_foreach(&v2, temp, i) {
-        printf("%d ", temp);
+    for(size_t i = 0; i < 10000000000; i++) {
+        vector_move(&v2, &v1);
+        vector_move(&v1, &v2);
     }
 
-    printf("\n");
-
+    int temp;
     vector_foreach(&v1, temp, i) {
         printf("%d ", temp);
     }

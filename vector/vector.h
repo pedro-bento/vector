@@ -5,6 +5,8 @@
 #include <string.h>
 #include <assert.h>
 
+#define VECTOR_VERSION 1
+
 // Definitions
 #define VECTOR_GROWTH_FACTOR 2
 
