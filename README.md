@@ -5,60 +5,21 @@ A generic type-safe vector implementation in pure C.
 # API
 
 ## Type
-### Vector(T) 
-Defines a vector of type T
-```c 
-Vector(float) fv;
-```
+* Vector(Type) 
 
 ## Constructor 
-### vector_new(&v)
-Zero initializes the vector 'v'
-```c 
-Vector(float) v; 
-vector_new(&v);
-```
+* vector_new(&vector)
 
 ## Destructor 
-### vector_delete(&v)
-Frees allocated data for vector 'v'
-```c 
-Vector(int) v; 
-vector_new(&v);
-vector_delete(&v);
-```
+* vector_delete(&vector)
 
 ## Insertion
-### vector_assign(&v, index, element)
-Assigns 'element' to position 'index' in vector 'v' (asserts index < vector_size(v))
-```c 
-vector_assign(&v, 42, 42);
-```
-### vector_insert(&v, index, element)
-Inserts 'element' to position 'index' in vector 'v' by moving all elements after 'index' to the right (asserts index < vector_size(v))
-```c 
-vector_insert(&v, 42, 42);
-```
-### vector_push_back(&v, element)
-Inserts 'element' at the end of vector 'v', if needed, increases the capacity of 'v'
-```c 
-vector_push_back(&v, 'A');
-```
-### vector_push_front(&v, element)
-Inserts 'element' at the beginning of vector 'v' by moving all elements to the right, if needed, increases the capacity of 'v'
-```c 
-vector_push_front(&v, 'B');
-```
-### vector_push_array(&v, array, array_size)
-Extends vector 'v' by appending all 'array_size' values of 'array', if needed, increases the capacity of 'v'
-```c 
-vector_push_array(&v, ((const int[]){9, 8, 7, 6, 5, 4, 3, 2, 1, 0}), 10);
-```
-### vector_extend(&v_dst, &v_src)
-Extends vector 'v_dst' by appending all elements of 'v_src', if needed, increases the capacity of 'v_dst'
-```c 
-vector_extend(&v_dst, &v_src);
-```
+* vector_assign(&vector, index, element)
+* vector_insert(&vector, index, element)
+* vector_push_back(&vector, element)
+* vector_push_front(&vector, element)
+* vector_push_array(&vector, array, array_size)
+* vector_extend(&vector_dst, &vector_src)
 
 ## Deletion
 * vector_clear(&vector)
@@ -92,3 +53,15 @@ vector_extend(&v_dst, &v_src);
 * vector_sort(&vector, comparator)
 * vector_swap(&vector, index1, index2)
 * vector_reverse(&vector)
+
+# Example usage
+```c 
+Vector(int) v;
+vector_new(&v);
+vector_reserve(&v, 128);
+vector_push_array(&v, ((const int[]){9, 8, 7, 6, 5, 4, 3, 2, 1, 0}), 10);
+vector_assign(&v, 42, 42);
+vector_erase(&v, 42);
+vector_reverse(&v);
+vector_delete(&v);
+```
