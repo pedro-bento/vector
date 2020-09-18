@@ -13,6 +13,8 @@ int main(int argc, char const *argv[])
     (void) argc;
     (void) argv;
 
+    printf("Begin of Vector tests\n");
+
     Vector(int) v1;
     vector_new(&v1);
     
@@ -74,10 +76,52 @@ int main(int argc, char const *argv[])
     assert(vector_at(&v1, 1) == 7);
     assert(vector_at(&v1, 2) == 11);
 
+    vector_shrink_to_fit(&v1);
+    assert(vector_capacity(&v1) == 3);
+    assert(vector_full(&v1));
+    assert(vector_unused_space(&v1) == 0);
+
+    vector_reverse(&v1);
+    assert(vector_at(&v1, 0) == 11);
+    assert(vector_at(&v1, 1) == 7);
+    assert(vector_at(&v1, 2) == 5);
+
+    vector_sort(&v1, int_comparator);
+    assert(vector_at(&v1, 0) == 5);
+    assert(vector_at(&v1, 1) == 7);
+    assert(vector_at(&v1, 2) == 11);
+
+    vector_swap(&v1, 0, 1);
+    assert(vector_at(&v1, 0) == 7);
+    assert(vector_at(&v1, 1) == 5);
+
+    int aux, *aux_ptr;
+    vector_foreach(&v1, aux, i) {
+        assert(vector_at(&v1, i) == aux);
+    }
+
+    vector_foreach_rev(&v1, aux, i) {
+        assert(vector_at(&v1, i) == aux);
+    }
+
+    vector_foreach_ptr(&v1, aux_ptr, i) {
+        assert(vector_at(&v1, i) == *aux_ptr);
+    }
+
+    vector_foreach_ptr_rev(&v1, aux_ptr, i) {
+        assert(vector_at(&v1, i) == *aux_ptr);
+    }
+
+    vector_resize(&v1, 10);
+    assert(vector_capacity(&v1) == 10);
+
+    vector_reserve(&v1, 13);
+    assert(vector_capacity(&v1) == 13);
+
     vector_delete(&v1);
     vector_delete(&v2);
 
-    printf("Test completed.");
+    printf("End of Vector tests :: Success\n");
 
     return 0;
 }
