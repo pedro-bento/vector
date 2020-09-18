@@ -26,49 +26,26 @@ int double_comparator(const void *a, const void *b) {
     else return 1;
 }
 
-// TODO:
-// replace condition in vector_pop_back by custom assert that can be turned off
-
 int main(int argc, char const *argv[])
 {
     (void) argc;
     (void) argv;
 
-    Vector(int) v;
-    vector_new(&v);
-    vector_push_array(&v, ((const int[]){9, 8, 7, 6, 5, 4, 3, 2, 1, 0}), 10);
+    Vector(int) v1, v2;
+    vector_new(&v1);
+    vector_new(&v2);
+
+    vector_push_array(&v1, ((const int[]){9, 8, 7, 6, 5, 4, 3, 2, 1, 0}), 10);
+
+    vector_copy(&v2, &v1);
 
     int temp;
-    vector_foreach(&v, temp, i) {
+    vector_foreach(&v2, temp, i) {
         printf("%d ", temp);
     }
 
-    vector_reverse(&v);
-
-    printf("\n");
-    vector_foreach(&v, temp, i) {
-        printf("%d ", temp);
-    }
-
-    vector_push_front(&v, 999);
-    vector_push_front(&v, 999);
-    vector_push_front(&v, 999);
-
-    printf("\n");
-    vector_foreach(&v, temp, i) {
-        printf("%d ", temp);
-    }
-
-    vector_pop_front(&v);
-    vector_pop_front(&v);
-    vector_pop_front(&v);
-
-    printf("\n");
-    vector_foreach(&v, temp, i) {
-        printf("%d ", temp);
-    }
-
-    vector_delete(&v);
+    vector_delete(&v1);
+    vector_delete(&v2);
 
     return 0;
 }

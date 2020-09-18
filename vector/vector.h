@@ -9,12 +9,7 @@
 #define VECTOR_GROWTH_FACTOR 2
 
 // Type.
-#define Vector(T)\
-    struct {\
-        size_t capacity;\
-        size_t size;\
-        T *data;\
-    }
+#define Vector(T)               struct { size_t capacity; size_t size; T *data; }
 
 // Constructor 
 #define vector_new(vector)      memset((vector), 0, sizeof(*(vector)))
@@ -23,13 +18,13 @@
 #define vector_delete(vector)   free((vector)->data)
 
 // Copy
-// TODO: vector_copy(vector_dst, vector_src)
+#define vector_copy(vector_dst, vector_src) do { vector_reserve(vector_dst, (vector_src)->size); memcpy((vector_dst)->data, (vector_src)->data, (vector_src)->size * sizeof(*(vector_src)->data)); (vector_dst)->size = (vector_src)->size; (vector_dst)->capacity = (vector_src)->capacity; } while (0)
 
 // Move
 // TODO: vector_move(vector_dst, vector_src)
 
 // Insertion
-#define vector_assign(vector, index, element)           ((vector)->data[(index)] = (element))
+#define vector_assign(vector, index, element)           do { assert(index < (vector)->size); ((vector)->data[(index)] = (element)); } while(0)
 #define vector_insert(vector, index, element)           do { assert(index < (vector)->size); __vector_move_right(__vector_unpack(vector), index); vector_assign(vector, index, element); (vector)->size++; } while(0)
 #define vector_push_back(vector, element)               do { __vector_expand(__vector_unpack(vector)); (vector)->data[(vector)->size] = (element); (vector)->size++; } while(0)
 #define vector_push_front(vector, element)              do { __vector_expand(__vector_unpack(vector)); vector_insert(vector, 0, element); } while (0)
