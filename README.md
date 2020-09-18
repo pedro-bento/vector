@@ -13,6 +13,9 @@ A generic type-safe vector implementation in pure C.
 ## Destructor 
 * vector_delete(&vector)
 
+## Copy
+* vector_copy(&vector_dst, &vector_src)
+
 ## Insertion
 * vector_assign(&vector, index, element)
 * vector_insert(&vector, index, element)
