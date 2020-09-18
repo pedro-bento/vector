@@ -15,13 +15,13 @@
 #define vector_new(vector)      memset((vector), 0, sizeof(*(vector)))
 
 // Destructor
-#define vector_delete(vector)   free((vector)->data)
+#define vector_delete(vector)   do { free((vector)->data); memset((vector), 0, sizeof(*(vector))); } while(0)
 
 // Copy
-#define vector_copy(vector_dst, vector_src) do { vector_reserve(vector_dst, (vector_src)->size); memcpy((vector_dst)->data, (vector_src)->data, (vector_src)->size * sizeof(*(vector_src)->data)); (vector_dst)->size = (vector_src)->size; (vector_dst)->capacity = (vector_src)->capacity; } while (0)
+#define vector_copy(vector_dst, vector_src)     do { vector_reserve(vector_dst, (vector_src)->size); memcpy((vector_dst)->data, (vector_src)->data, (vector_src)->size * sizeof(*(vector_src)->data)); (vector_dst)->size = (vector_src)->size; (vector_dst)->capacity = (vector_src)->capacity; } while(0)
 
 // Move
-// TODO: vector_move(vector_dst, vector_src)
+#define vector_move(vector_dst, vector_src)     do { vector_delete(vector_dst); *vector_dst = *vector_src; memset((vector_src), 0, sizeof(*(vector_src))); } while(0)
 
 // Insertion
 #define vector_assign(vector, index, element)           do { assert(index < (vector)->size); ((vector)->data[(index)] = (element)); } while(0)
