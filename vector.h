@@ -10,7 +10,7 @@
 // Definitions
 #define VECTOR_GROWTH_FACTOR 2
 
-// Type.
+// Type
 #define Vector(T)               struct { size_t capacity; size_t size; T *data; }
 
 // Constructor 
@@ -26,8 +26,8 @@
 #define vector_move(vector_dst, vector_src)     do { vector_delete(vector_dst); (vector_dst)->size = (vector_src)->size; (vector_dst)->capacity = (vector_src)->capacity; (vector_dst)->data = (vector_src)->data; memset((vector_src), 0, sizeof(*(vector_src))); } while(0)
 
 // Insertion
-#define vector_assign(vector, index, element)           do { assert(index < (vector)->capacity); ((vector)->data[(index)] = (element)); } while(0)
-#define vector_insert(vector, index, element)           do { assert(index < (vector)->capacity); __vector_move_right(__vector_unpack(vector), index); vector_assign(vector, index, element); (vector)->size++; } while(0)
+#define vector_assign(vector, index, element)           do { assert((index) < (vector)->capacity); ((vector)->data[(index)] = (element)); } while(0)
+#define vector_insert(vector, index, element)           do { assert((index) < (vector)->capacity); __vector_move_right(__vector_unpack(vector), index); vector_assign(vector, index, element); (vector)->size++; } while(0)
 #define vector_push_back(vector, element)               do { __vector_expand(__vector_unpack(vector)); (vector)->data[(vector)->size] = (element); (vector)->size++; } while(0)
 #define vector_push_front(vector, element)              do { __vector_expand(__vector_unpack(vector)); vector_insert(vector, 0, element); } while (0)
 #define vector_push_array(vector, array, array_size)    do { vector_reserve(vector, vector_size(vector) + (array_size)); memcpy(&(vector)->data[(vector)->size], array, array_size * sizeof(*array)); (vector)->size += array_size; } while(0)
@@ -35,7 +35,7 @@
 
 // Deletion
 #define vector_clear(vector)        ((vector)->size = 0)
-#define vector_erase(vector, index) do { assert(index < (vector)->capacity); __vector_move_left(__vector_unpack(vector), index); (vector)->size--; } while(0)
+#define vector_erase(vector, index) do { assert((index) < (vector)->capacity); __vector_move_left(__vector_unpack(vector), index); (vector)->size--; } while(0)
 #define vector_pop_back(vector)     do { assert((vector)->size > 0); (vector)->size--; } while(0)
 #define vector_pop_front(vector)    vector_erase(vector, 0)
 

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "../vector/vector.h"
+#include "../vector.h"
 
 int int_comparator(const void *a, const void *b) {
     if(*(int*)a < *(int*)b) return -1;
